@@ -4,9 +4,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 
+/**
+ * WikiApplication能扫描到 cotroller包下的TestController的原因：
+ *  包含@ComponentScan注解，可扫描当前路径下所有子包
+ *  也支持扫描指定路径下的包：
+ *
+ */
+// @ComponentScan("com.dev")   // 扫描指定路径下的包
+// @ComponentScan({"com.dev", "com.test"})   // 扫描多个路径下的包
 @SpringBootApplication
 public class WikiApplication {
 
