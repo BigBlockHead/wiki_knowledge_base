@@ -1,7 +1,14 @@
 package com.dev.wiki.controller;
 
+import com.dev.wiki.domain.Test;
+import com.dev.wiki.service.TestService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 @RestController     // @Controller(返回页面) + @ResponseBody(返回字符串或JSON对象)
 
@@ -9,6 +16,10 @@ public class TestController {
 
     @Value("${test.hello:default}")     // 通过 @Value注解 获取自定义配置项(支持默认值)
     private String testHello;
+
+    // 引入service层
+    @Resource
+    private TestService testService;
 
     /**
      * 常见的Http请求类型：
@@ -37,5 +48,10 @@ public class TestController {
     @PostMapping("/hello/post")
     public String helloPost(String name) {
         return "Hello World, post -> " + name;
+    }
+
+    @GetMapping("/test/list")
+    public List<Test> list() {
+        return testService.list();
     }
 }
